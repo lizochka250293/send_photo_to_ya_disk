@@ -9,8 +9,6 @@ def get_file_info(bot, message):
         file_info = bot.get_file(message.document.file_id)
     elif message.content_type == 'photo':
         file_info = bot.get_file(message.photo[len(message.photo) - 1].file_id)
-    elif message.content_type == "text":
-        return False
     return file_info
 
 
@@ -47,3 +45,10 @@ class DiskConnector:
             self.disk.upload(f"{src}", f"/telegram/{file_to_path}")
             return True
         return False
+
+    def back(self, bot, message):
+        message_to_back = message.text
+        if message_to_back == '/break':
+            return message_to_back
+        else:
+            return False

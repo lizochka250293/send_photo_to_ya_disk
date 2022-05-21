@@ -1,7 +1,6 @@
 import os
 import shutil
 from datetime import datetime
-
 import telebot
 import yadisk
 
@@ -38,7 +37,7 @@ def set_token(message):
 
 @bot.message_handler(content_types=['photo', 'document'])
 def upload_step(message):
-    if message.content_type in ["text"] and message.text != '/break':
+    if not disk.back(bot, message) and message.content_type in ["text"]:
         sent = bot.reply_to(message, 'Проверь формат файла')
         bot.register_next_step_handler(sent, upload_step)
     elif message.content_type in ["document", "photo"]:
